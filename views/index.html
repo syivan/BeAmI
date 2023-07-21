@@ -34,15 +34,15 @@
                 <div id="personal-info">
                     <div class="progress" style="width: 70%">
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 33%"></div>
                     </div>
                     <table style="margin-top: -10px;">
                         <tr>
                             <th>
-                                <label for="exampleInputEmail1" class="form-label mt-4">(Height in Feet)</label>
+                                <label class="form-label mt-4">(Height in Feet)</label>
                             </th>
                             <th>
-                                <label for="exampleInputEmail1" class="form-label mt-4">(Height in Inches)</label>
+                                <label class="form-label mt-4">(Height in Inches)</label>
                             </th>
                         </tr>
                         <tr>
@@ -55,6 +55,25 @@
                                 <div class="form-group">
                                     <input type="number" class="form-control" id="height-inches"
                                         placeholder="Enter inches">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Gender</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group mt-2">
+                                    <div style="margin-top: -10px;">
+                                        <label class="fw-bold text-primary"><input type="radio"
+                                                class="form-check-input me-2" name="gender" id="male-choice"
+                                                value="male">Male</label>
+                                        <label class="fw-bold text-danger ms-3"><input type="radio"
+                                                class="form-check-input me-2" name="gender" id="female-choice"
+                                                value="female">Female</label>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
