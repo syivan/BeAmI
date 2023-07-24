@@ -1,4 +1,6 @@
+// initial imports of required frameworks and packages
 var express = require("express");
+// body-parser needed since user data will be entailed in the url
 const bodyParser = require("body-parser");
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -9,6 +11,7 @@ app.get('', async function (req, res) {
     res.sendFile(__dirname + '/views/index.html')
 });
 
+//For more information: https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/english_bmi_calculator/bmi_calculator.html
 app.post('/bmi', async function (req, res) {
     var height_feet = parseInt(req.body.heightFeet);
     var height_inches = parseInt(req.body.heightInches);
@@ -19,6 +22,7 @@ app.post('/bmi', async function (req, res) {
     res.send(`Your BMI is ${bmi}`);
 });
 
+//For more information: https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/calorie-calculator/itt-20402304
 app.post('/idealcalorie', async function (req, res) {
     var weight = parseInt(req.body.weight);
     var height_feet = parseInt(req.body.heightFeet);
@@ -57,6 +61,7 @@ app.post('/idealcalorie', async function (req, res) {
     res.send(`Your Ideal Calorie intake is ${amr} calories per day`);
 });
 
+//For more information: https://www.bodybuilding.com/fun/fats_calculator.htm
 app.post('/idealfat', async function (req, res) {
     var weight = parseInt(req.body.weight);
     var height_feet = parseInt(req.body.heightFeet);
@@ -96,6 +101,7 @@ app.post('/idealfat', async function (req, res) {
     res.send(`Your Ideal Fat intake is ${fat_intake} calories per day`);
 });
 
+//https://pubs.asahq.org/anesthesiology/article/127/1/203/18747/Calculating-Ideal-Body-Weight-Keep-It-Simple
 app.post('/idealweight', async function (req, res) {
     var weight = parseInt(req.body.weight);
     var height_feet = parseInt(req.body.heightFeet);
@@ -109,7 +115,7 @@ app.post('/idealweight', async function (req, res) {
         ideal_weight = 45.5 + (0.91 * (height_cm - 152.4));
     }
     ideal_weight = ideal_weight.toFixed(2);
-    res.send(`Your Ideal Body Weight should be ${ideal_weight}`);
+    res.send(`Your Ideal Body Weight should be ${ideal_weight} kg`);
 });
 
 app.listen(3000, function () {
