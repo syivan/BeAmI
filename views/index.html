@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ivan Sy">
     <title>BeAmI: The Handy Health Navigator</title>
-    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css" </head>
+    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
 
 <body>
     <nav class="navbar navbar-dark navbar-expand-lg bg-primary mb-3">
@@ -15,8 +19,8 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="active">
+    <!-- <div class="container">
+        <div id="landing-1">
             <h2>Welcome to BeAmI.io</h2>
             <p>We've designed ourselves to give crucial health and fitness information based on your likeness. If
                 you're
@@ -24,18 +28,33 @@
                 enter the Begin button and let us do the processing.
             </p>
             <div class="text-center">
-                <button class="btn btn-primary w-25 mb-3 mt-3" id="start">Start</button>
+                <button class="btn btn-primary w-25 mb-3 mt-3" id="start"><span class="fw-bold">Start</span></button>
             </div>
-        </div>
+        </div> -->
 
-        <div class="ps-5">
-            <h4 class="justify-content-center mb-3">Tell me about yourself</h4>
-            <form>
-                <div id="personal-info">
-                    <div class="progress" style="width: 70%">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 33%"></div>
-                    </div>
+    <div class="container mainContainer">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-selected="true" role="tab"
+                    aria-controls="home">Body Mass Index</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="calorie-tab" data-toggle="tab" href="#caloriePanel" aria-selected="true"
+                    role="tab" aria-controls="caloriePanel">Ideal Calorie Intake</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="fat-tab" data-toggle="tab" href="#fatPanel" aria-selected="true" role="tab"
+                    aria-controls="fatPanel">Ideal Fat Intake</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="weight-tab" data-toggle="tab" href="#weightPanel" aria-selected="true"
+                    role="tab" aria-controls="weightPanel">Ideal Weight Calculator</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active container" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <form action="/bmi" method="post">
                     <table style="margin-top: -10px;">
                         <tr>
                             <th>
@@ -48,13 +67,76 @@
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="height-feet" placeholder="Enter feet">
+                                    <input type="number" class="form-control" id="height-feet" placeholder="Enter feet"
+                                        name="heightFeet" required>
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <input type="number" class="form-control" id="height-inches"
-                                        placeholder="Enter inches">
+                                        placeholder="Enter inches" name="heightInches" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">(Weight in lb)</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="weight-form" name="weight"
+                                        placeholder="Enter pounds" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="next-button btn btn-primary mt-4">
+                                    <span class="fw-bold">Enter</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <div class="tab-pane fade show" id="caloriePanel" role="tabpanel" aria-labelledby="calorie-tab">
+                <form action="/idealcalorie" method="post">
+                    <table style="margin-top: -10px;">
+                        <tr>
+                            <th>
+                                <label class="form-label mt-4">(Height in Feet)</label>
+                            </th>
+                            <th>
+                                <label class="form-label mt-4">(Height in Inches)</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="height-feet" placeholder="Enter feet"
+                                        name="heightFeet" required>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="height-inches"
+                                        placeholder="Enter inches" name="heightInches" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">(Weight in lb)</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="weight-form" name="weight"
+                                        placeholder="Enter pounds" required>
                                 </div>
                             </td>
                         </tr>
@@ -69,7 +151,7 @@
                                     <div style="margin-top: -10px;">
                                         <label class="fw-bold text-primary"><input type="radio"
                                                 class="form-check-input me-2" name="gender" id="male-choice"
-                                                value="male">Male</label>
+                                                value="male" checked>Male</label>
                                         <label class="fw-bold text-danger ms-3"><input type="radio"
                                                 class="form-check-input me-2" name="gender" id="female-choice"
                                                 value="female">Female</label>
@@ -77,12 +159,217 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Age</label>
+                            <th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="age-form" name="age"
+                                        placeholder="Enter age" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Activity Level</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <select name="activityLevel">
+                                        <option value="sedantary">Little or no Exercise</option>
+                                        <option value="light">Lightly active (light exercise/sports 1-3 days​/week)
+                                        </option>
+                                        <option value="moderate">Moderately active (moderate exercise/sports 3-5
+                                            days/week)</option>
+                                        <option value="very">Very active (hard exercise/sports 6-7 days a week)</option>
+                                        <option value="extra">Extra active (very hard exercise/sports & physical job or
+                                            2x
+                                            training)
+                                        </option>
+                                    </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="next-button btn btn-primary mt-4">
+                                    <span class="fw-bold">Enter</span>
+                                </button>
+                            </td>
+                        </tr>
                     </table>
-                </div>
+                </form>
+            </div>
 
-            </form>
+            <div class="tab-pane fade show" id="fatPanel" role="tabpanel" aria-labelledby="fat-tab">
+                <form action="/idealfat" method="post">
+                    <table style="margin-top: -10px;">
+                        <tr>
+                            <th>
+                                <label class="form-label mt-4">(Height in Feet)</label>
+                            </th>
+                            <th>
+                                <label class="form-label mt-4">(Height in Inches)</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="height-feet" placeholder="Enter feet"
+                                        name="heightFeet" required>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="height-inches"
+                                        placeholder="Enter inches" name="heightInches" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">(Weight in lb)</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="weight-form" name="weight"
+                                        placeholder="Enter pounds" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Gender</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group mt-2">
+                                    <div style="margin-top: -10px;">
+                                        <label class="fw-bold text-primary"><input type="radio"
+                                                class="form-check-input me-2" name="gender" id="male-choice"
+                                                value="male" checked>Male</label>
+                                        <label class="fw-bold text-danger ms-3"><input type="radio"
+                                                class="form-check-input me-2" name="gender" id="female-choice"
+                                                value="female">Female</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Age</label>
+                            <th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="age-form" name="age"
+                                        placeholder="Enter age" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Activity Level</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <select name="activityLevel">
+                                        <option value="sedantary">Little or no Exercise</option>
+                                        <option value="light">Lightly active (light exercise/sports 1-3 days​/week)
+                                        </option>
+                                        <option value="moderate">Moderately active (moderate exercise/sports 3-5
+                                            days/week)</option>
+                                        <option value="very">Very active (hard exercise/sports 6-7 days a week)</option>
+                                        <option value="extra">Extra active (very hard exercise/sports & physical job or
+                                            2x
+                                            training)
+                                        </option>
+                                    </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="next-button btn btn-primary mt-4">
+                                    <span class="fw-bold">Enter</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <br>
+
+            <div class="tab-pane fade show" id="weightPanel" role="tabpanel" aria-labelledby="weight-tab">
+                <form action="/idealweight" method="post">
+                    <table style="margin-top: -10px;">
+                        <tr>
+                            <th>
+                                <label class="form-label">(Height in Feet)</label>
+                            </th>
+                            <th>
+                                <label class="form-label">(Height in Inches)</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="height-feet" placeholder="Enter feet"
+                                        name="heightFeet" required>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="height-inches"
+                                        placeholder="Enter inches" name="heightInches" required>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label class="form-label mt-2">Gender</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <div style="margin-top: -10px;">
+                                        <label class="fw-bold text-primary"><input type="radio"
+                                                class="form-check-input me-2" name="gender" id="male-choice"
+                                                value="male" checked>Male</label>
+                                        <label class="fw-bold text-danger ms-3"><input type="radio"
+                                                class="form-check-input me-2" name="gender" id="female-choice"
+                                                value="female">Female</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="next-button btn btn-primary mt-4">
+                                    <span class="fw-bold">Enter</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
         </div>
     </div>
+
+    <script src="js/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>
